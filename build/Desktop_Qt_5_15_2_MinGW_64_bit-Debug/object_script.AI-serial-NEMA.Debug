@@ -1,0 +1,10 @@
+debug/obj/main.o
+debug/obj/mainwindow.o
+debug/obj/serialmanager.o
+debug/obj/nmeaparser.o
+debug/obj/chartmanager.o
+debug/obj/qrc_resources.o
+debug/obj/moc_mainwindow.o
+debug/obj/moc_serialmanager.o
+debug/obj/moc_nmeaparser.o
+debug/obj/moc_chartmanager.o
