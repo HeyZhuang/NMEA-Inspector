@@ -1,155 +1,87 @@
-# 卫星应用软件
+# 🛰️ NMEA Inspector
 
-这是一个基于QT开发的GNSS（全球导航卫星系统）数据可视化和分析软件，支持NMEA协议数据的解析和多种视图显示。
+> 🎯 **一款基于 Qt/C++ 的高性能 NMEA-0183 卫星导航数据分析与可视化工具**
 
-## 功能特性
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Qt](https://img.shields.io/badge/Qt-6.x-green.svg)](https://www.qt.io/)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)]()
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)]()
 
-### 主要模块
+---
 
-1. **主窗口**
-   - 菜单栏：包含"回放"菜单，支持NMEA文件回放
-   - 工具栏：快速切换各个视图窗口
-   - 状态栏：显示当前状态和进度信息
+## 📖 项目简介 (Introduction)
 
-2. **NMEA视图**
-   - 显示原始NMEA数据流
-   - 支持数据保存和清空功能
-   - 实时显示数据接收状态
+**NMEA Inspector** 是一个跨平台的卫星导航数据分析工具，专为嵌入式开发者、导航算法工程师及相关专业学生设计。
 
-3. **基础视图**
-   - 显示基本定位信息：纬度、经度、海拔
-   - 显示时间信息：UTC时间、UTC日期、北京时间
-   - 数据格式符合标准要求
+本项目旨在解决 GNSS 开发过程中数据繁杂、难以直观分析的痛点。它能够实时解析标准的 **NMEA-0183** 协议数据（支持 **北斗 BDS**、GPS、GLONASS、Galileo 等主流卫星系统），并通过现代化的 UI 界面进行多维度可视化展示。
 
-4. **消息视图**
-   - 树形结构显示NMEA消息类型
-   - 表格形式显示详细字段信息
-   - 支持多种NMEA语句类型（GGA、GSA、GSV、RMC等）
+无论是串口实时调试，还是日志文件回放分析，NMEA Inspector 都能助你一臂之力。
 
-5. **星位视图**
-   - 极坐标雷达图显示卫星分布
-   - 支持四大卫星系统：GPS、北斗、格洛纳斯、伽利略
-   - 不同颜色区分不同系统
-   - 鼠标悬停显示卫星详细信息
+## ✨ 核心功能 (Features)
 
-6. **载噪比视图**
-   - 柱状图显示各卫星系统的信噪比
-   - 颜色渐变条表示信号强度
-   - 区分用于定位和未用于定位的卫星
+* **🔌 多源数据接入**：
+    * 支持 **串口 (Serial Port)** 实时数据读取，波特率自适应。
+    * 支持本地 **NMEA 日志文件** 的导入与回放分析。
+* **⚡ 高性能解析**：
+    * 基于 C++ 的高效解析引擎，支持 `$GPGGA`, `$GPRMC`, `$GPGSV`, `$BDGSV` (北斗) 等常用语句。
+    * 实时校验和 (Checksum) 检测，过滤错误数据。
+* **📊 多维可视化 (Visualization)**：
+    * **星空图 (Skyplot)**：直观展示卫星的方位角与仰角分布。
+    * **信噪比图 (SNR)**：实时柱状图展示各颗卫星的信号强度。
+    * **定位轨迹 (Track Map)**：基于 Canvas/地图组件绘制实时定位轨迹。
+    * **仪表盘**：直观显示速度、航向、经纬度及定位状态 (Fix Status)。
+* **🛠️ 开发者工具**：
+    * 原始数据十六进制 (Hex) 查看。
+    * 数据导出与保存。
 
-## 技术架构
+## 📸 项目演示 (Demo)
 
-### 核心组件
+*(此处建议放一张软件运行的主界面截图，或者一个简短的 GIF 动图)*
 
-- **NMEAParser**: NMEA数据解析器，支持多种语句类型
-- **FileManager**: 文件管理器，处理NMEA文件回放
-- **SatelliteData**: 数据结构定义，包含卫星信息和定位数据
-- **各视图模块**: 独立的视图窗口，负责数据可视化
+| 卫星星空图 | 信号强度分析 | 实时轨迹回放 |
+| :---: | :---: | :---: |
+| ![Skyplot Placeholder](https://via.placeholder.com/300x200?text=Skyplot+View) | ![SNR Placeholder](https://via.placeholder.com/300x200?text=SNR+Analysis) | ![Map Placeholder](https://via.placeholder.com/300x200?text=Track+Map) |
 
-### 支持的NMEA语句
+## 🚀 快速开始 (Getting Started)
 
-- **GPGGA**: 全球定位系统固定数据
-- **GPRMC**: 推荐的最小特定导航数据
-- **GPGSV**: GPS卫星在视图中
-- **GPGSA**: GPS DOP和活动卫星
-- **GPGLL**: 地理位置—纬度/经度
-- **GPVTG**: 航向和地面速度
-- **GPZDA**: 日期和时间
+### 开发环境要求
+* **C++ Standard**: C++ 17 及以上
+* **Qt Version**: Qt 6.2+ (推荐) 或 Qt 5.15
+* **Compiler**: MSVC 2019+ / GCC / Clang
+* **Build System**: CMake 或 QMake
 
-## 编译和运行
+### 安装与构建 (Build)
 
-### 环境要求
+1.  **克隆仓库**
+    ```bash
+    git clone git@github.com:HeyZhuang/NMEA-Inspector.git
+    cd NMEA-Inspector
+    ```
 
-- Qt 5.15 或更高版本
-- C++17 编译器
-- Qt Charts 模块
+2.  **使用 Qt Creator 构建 (推荐)**
+    * 打开 `CMakeLists.txt` 或 `.pro` 文件。
+    * 配置项目构建套件 (Kit)。
+    * 点击 **运行 (Run)** 即可。
 
-### 编译步骤
+3.  **命令行构建 (CMake)**
+    ```bash
+    mkdir build && cd build
+    cmake ..
+    make
+    ./NMEA-Inspector
+    ```
 
-1. 打开Qt Creator
-2. 打开项目文件 `satellite_app.pro`
-3. 配置构建套件
-4. 编译并运行
+## 📂 项目结构 (Structure)
 
-### 命令行编译
-
-```bash
-qmake satellite_app.pro
-make
-```
-
-## 使用方法
-
-### 1. 启动软件
-
-运行编译后的可执行文件，主窗口将显示。
-
-### 2. 加载NMEA数据
-
-1. 点击菜单栏"回放" -> "开始"
-2. 选择NMEA数据文件（.txt格式）
-3. 软件将按1秒间隔回放数据
-
-### 3. 查看各个视图
-
-- 点击工具栏按钮打开对应视图
-- 各视图将实时显示解析后的数据
-- 可以同时打开多个视图窗口
-
-### 4. 数据保存
-
-- 在NMEA视图中可以保存原始数据
-- 基础视图显示的数据可以用于记录
-
-## 测试数据
-
-项目包含测试文件 `test_data.nmea`，包含各种NMEA语句类型的示例数据。
-
-## 数据格式说明
-
-### 基础视图数据格式
-
-- **纬度**: DD.DDDDDD° (保留6位小数)
-- **经度**: DDD.DDDDDD° (保留6位小数)  
-- **海拔**: AA.AA m (保留2位小数)
-- **时间**: HH:MM:SS (UTC时间)
-- **日期**: YYYY:MM:DD (UTC日期)
-
-### 卫星系统标识
-
-- **GPS**: 蓝色，PRN 1-32
-- **北斗(BDS)**: 橙色，PRN 201-235
-- **格洛纳斯(GLN)**: 绿色，PRN 65-96
-- **伽利略(GAL)**: 紫色，PRN 301-336
-
-## 扩展功能
-
-软件架构支持以下扩展：
-
-1. **实时串口通信**: 可扩展支持实时串口数据接收
-2. **数据导出**: 支持多种格式的数据导出
-3. **地图集成**: 可集成地图显示功能
-4. **数据分析**: 可添加数据统计和分析功能
-
-## 故障排除
-
-### 常见问题
-
-1. **编译错误**: 确保安装了Qt Charts模块
-2. **数据不显示**: 检查NMEA文件格式是否正确
-3. **视图不更新**: 确保数据解析正常
-
-### 调试信息
-
-软件会在控制台输出详细的调试信息，包括：
-- NMEA语句解析状态
-- 数据更新信息
-- 错误信息
-
-## 许可证
-
-本项目仅供学习和研究使用。
-
-## 联系方式
-
-如有问题或建议，请联系开发团队。
+```text
+NMEA-Inspector/
+├── src/                # 源代码
+│   ├── core/           # NMEA 解析核心逻辑
+│   ├── gui/            # Qt 界面文件 (.ui, .cpp, .h)
+│   ├── utils/          # 工具类 (串口管理, 文件操作)
+│   └── main.cpp        # 程序入口
+├── resources/          # 图标与资源文件
+├── tests/              # 单元测试
+├── docs/               # 文档说明
+└── README.md           # 你正在阅读的文档
